@@ -32,7 +32,10 @@ export const BatchMIPRES = () => {
 
     try {
       // 1. Enviar el archivo
-      const response = await fetch('http://localhost:3001/api/batch/excel', {
+      const apiBase = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api';
+      const endpoint = apiBase.endsWith('/') ? `${apiBase}batch/excel` : `${apiBase}/batch/excel`;
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         body: formData,
       });
