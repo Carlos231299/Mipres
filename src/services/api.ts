@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-// Cliente Axios apuntando al backend local (nunca a SISPRO directamente)
 const api = axios.create({
-  baseURL: 'http://localhost:3001/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001/api',
   headers: { 'Content-Type': 'application/json' },
   timeout: 30000,
 });
