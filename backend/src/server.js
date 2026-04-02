@@ -11,7 +11,12 @@ const PORT = process.env.PORT || 3001;
 
 // ── Middlewares ────────────────────────────────────────────
 app.use(cors({
-  origin: 'http://localhost:5173', // URL del frontend Vite
+  origin: [
+    'http://localhost:5173',
+    'http://3.137.155.77',
+    'http://3.137.155.77:5173',
+    'http://3.137.155.77:3001'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
@@ -32,8 +37,8 @@ app.use('/api/batch',    batchRouter);
 async function start() {
   await testConnection();    // Verifica DB antes de abrir el puerto
   await runMigrations();     // Crea tablas si no existen
-  app.listen(PORT, () => {
-    console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Servidor corriendo en http://0.0.0.0:${PORT}`);
   });
 }
 
